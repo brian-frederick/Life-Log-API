@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Life_Log_API.Models;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -13,9 +14,15 @@ namespace Life_Log_API.Controllers
     {
         // GET: api/<controller>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Consumable> Get()
         {
-            return new string[] { "consumable1", "value2" };
+            var allConsumables = new Consumable[]
+            {
+                new Consumable { Name = "Buffalo Wings" },
+                new Consumable { Name = "TV" },
+                new Consumable { Name = "Podcast" }
+            };
+            return allConsumables;
         }
 
         // GET api/<controller>/5
