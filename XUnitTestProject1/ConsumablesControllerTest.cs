@@ -1,5 +1,7 @@
 using Life_Log_API.Controllers;
 using Life_Log_API.Models;
+using Life_Log_API.Services;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +11,38 @@ namespace XUnitTestProject1
 {
     public class ConsumablesControllerTest
     {
-        [Fact]
-        public void Should_return_OkObjectResult_with_consumables()
+        protected ConsumablesController ControllerUnderTest { get; }
+        protected Mock<IConsumablesService> ConsumablesServiceMock { get; }
+
+        public ConsumablesControllerTest()
         {
-
-            // arrange
-            var expectedConsumablesCount = 3;
-
-            // act 
-            var controller = new ConsumablesController();
-            var result = controller.Get();
-
-            // assert
-            Assert.Equal(expectedConsumablesCount, result.Count());
+            ConsumablesServiceMock = new Mock<IConsumablesService>();
+            ControllerUnderTest = new ConsumablesController(ConsumablesServiceMock.Object);
         }
+
+        public class Get : ConsumablesControllerTest
+        {
+            [Fact]
+            public void Should_return_all_consumables()
+            {
+
+                // arrange
+                var dateValue = new DateTime(2017, 1, 18);
+                var expectedConsumables = new Consumable[]
+                {
+                    new Consumable {Id = 0, Name = "Buffalo Wings", CreatedAt = dateValue, Quantity = null, Unit = null, Rating = 0},
+                };
+                ConsumablesServiceMock
+                    .Setup(x => x.Get())
+                    .Returns(expectedConsumables);
+
+                // act 
+                var result = ControllerUnderTest.Get();
+
+                // assert
+                Assert.Equal(expectedConsumables, result);
+            }
+        }
+        
     }
 }
