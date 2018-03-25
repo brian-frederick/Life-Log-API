@@ -37,8 +37,10 @@ namespace Life_Log_API.Controllers
 
         // POST api/<controller>
         [HttpPost]
-        public void Post([FromBody]string value)
+        public IActionResult Post([FromBody]Consumable consumableToSave)
         {
+            var newConsumable = _consumablesService.Post(consumableToSave);
+            return Ok(newConsumable);
         }
 
         // PUT api/<controller>/5

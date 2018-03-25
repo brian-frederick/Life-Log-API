@@ -29,7 +29,7 @@ namespace XUnitTestProject1
                 var dateValue = new DateTime(2017, 1, 18);
                 var expectedConsumables = new Consumable[]
                 {
-                    new Consumable {Id = 0, Name = "Buffalo Wings", CreatedAt = dateValue, Quantity = "1", Unit = "serving", Rating = 1},
+                    new Consumable {Id = 0, Name = "Buffalo Wings", CreatedAt = dateValue, Quantity = 12, Unit = "Pieces", ImmediateRating = 0, PostRating = 0},
                 };
                 ConsumablesRepositoryMock
                     .Setup(x => x.Get())

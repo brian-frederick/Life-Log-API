@@ -18,7 +18,7 @@ namespace XUnitTestProject1
 
             Consumables = new List<Consumable>
             {
-                new Consumable {Id = 0, Name = "Buffalo Wings", CreatedAt = dateValue, Quantity = null, Unit = null, Rating = 0}
+                new Consumable {Id = 0, Name = "Buffalo Wings", CreatedAt = dateValue, Quantity = 12, Unit = "Pieces", ImmediateRating = 0, PostRating = 0}
             };
 
             ConsumablesRepositoryToTest = new ConsumablesRepository(Consumables);
@@ -33,7 +33,7 @@ namespace XUnitTestProject1
                 var dateValue = new DateTime(2017, 1, 18);
                 var expectedConsumables = new List<Consumable>
                 {
-                    new Consumable {Id = 0, Name = "Buffalo Wings", CreatedAt = dateValue, Quantity = null, Unit = null, Rating = 0},
+                    new Consumable {Id = 0, Name = "Buffalo Wings", CreatedAt = dateValue, Quantity = 1, Unit = "piece", ImmediateRating = 0, PostRating = 1},
                 };
 
                 // act

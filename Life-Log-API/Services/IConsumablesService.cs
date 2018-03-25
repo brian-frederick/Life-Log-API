@@ -9,5 +9,6 @@ namespace Life_Log_API.Services
     public interface IConsumablesService
     {
         IEnumerable<Consumable> Get();
+        Consumable Post(Consumable consumableToAdd);
     }
 }
