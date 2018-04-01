@@ -9,6 +9,7 @@ namespace Life_Log_API.Repositories
     public interface IConsumablesRepository
     {
         IEnumerable<Consumable> Get();
+        Consumable Get(int id);
         Consumable Post(Consumable consumableToAdd);
     }
 }

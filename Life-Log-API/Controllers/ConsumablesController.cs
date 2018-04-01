@@ -30,9 +30,17 @@ namespace Life_Log_API.Controllers
             
         // GET api/<controller>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            try
+            {
+                var requestedConsumable = _consumablesService.Get(id);
+                return Ok(requestedConsumable);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e);
+            }
         }
 
         // POST api/<controller>

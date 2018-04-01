@@ -31,6 +31,41 @@ namespace Life_Log_API.Repositories
 
         }
 
+        public Consumable Get(int id)
+        {
+
+            SqlConnection myConnection = new SqlConnection();
+            SqlDataReader reader = null;
+            var requestedConsumable = new Consumable();
+            myConnection.ConnectionString = Configuration.GetConnectionString("lifeLogDatabase");
+            SqlCommand sqlCmd = new SqlCommand();
+            sqlCmd.Connection = myConnection;
+
+            sqlCmd.CommandType = CommandType.Text;
+            sqlCmd.CommandText = "SELECT * FROM CONSUMABLES where id = @ID";
+
+            sqlCmd.Parameters.AddWithValue("@ID", id);
+            myConnection.Open();
+            reader = sqlCmd.ExecuteReader();
+
+            if (!reader.Read())
+            {
+                throw new Exception();
+            }
+            
+            requestedConsumable.Id = Convert.ToInt16(reader["ID"]);
+            requestedConsumable.Name = Convert.ToString(reader["NAME"]);
+            requestedConsumable.CreatedAt = Convert.ToDateTime(reader["CREATEDAT"]);
+            requestedConsumable.Quantity = Convert.ToInt16(reader["QUANTITY"]);
+            requestedConsumable.Unit = Convert.ToString(reader["UNIT"]);
+            requestedConsumable.ImmediateRating = Convert.ToInt16(reader["IMMEDIATERATING"]);
+            requestedConsumable.PostRating = Convert.ToInt16(reader["POSTRATING"]);
+            
+            myConnection.Close();
+
+            return requestedConsumable;
+        }
+
         public IEnumerable<Consumable> Get()
         { 
             return _consumables;

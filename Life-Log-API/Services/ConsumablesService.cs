@@ -23,6 +23,13 @@ namespace Life_Log_API.Services
             return allConsumables;
         }
 
+        public Consumable Get(int id)
+        {
+            var requestedConsumable = _consumablesRepository.Get(id);
+
+            return requestedConsumable;
+        }
+
         public Consumable Post(Consumable consumableToAdd)
         {
             var addedConsumable = _consumablesRepository.Post(consumableToAdd);
